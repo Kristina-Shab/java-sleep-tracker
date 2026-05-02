@@ -31,13 +31,4 @@ public class SleepingSession {
     public SleepQuality getQuality() {
         return quality;
     }
-
-    @Override
-    public String toString() {
-        return "SleepingSession{" +
-                "sleepStart=" + sleepStart +
-                ", sleepEnd=" + sleepEnd +
-                ", quality=" + quality +
-                '}' + System.lineSeparator();
-    }
 }

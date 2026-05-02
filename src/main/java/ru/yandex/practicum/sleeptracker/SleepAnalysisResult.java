@@ -12,4 +12,12 @@ public class SleepAnalysisResult<T> {
     public void printResult() {
         System.out.println(description + ": " + value);
     }
+
+    public T getValue() {
+        return value;
+    }
+
+    public String getDescription() {
+        return description;
+    }
 }
