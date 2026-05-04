@@ -26,7 +26,7 @@ class CountSessionDurationAnalyzerTest {
     }
 
     @Test
-    void applySingleSession() {
+    void applySingleSessionWithValidDescription() {
         List<SleepingSession> sessions = List.of(testSession);
         SleepAnalysisResult<Integer> result = analyzer.apply(sessions);
         assertEquals(1, result.getValue());
@@ -38,6 +38,5 @@ class CountSessionDurationAnalyzerTest {
         List<SleepingSession> sessions = List.of(testSession, testSession, testSession);
         SleepAnalysisResult<Integer> result = analyzer.apply(sessions);
         assertEquals(3, result.getValue());
-        assertEquals("Количество сессий сна за представленный период", result.getDescription());
     }
 }

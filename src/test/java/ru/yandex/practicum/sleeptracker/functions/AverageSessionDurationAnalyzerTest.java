@@ -32,17 +32,11 @@ class AverageSessionDurationAnalyzerTest {
     }
 
     @Test
-    void applyValidDescription() {
-        List<SleepingSession> sessions = List.of(testSession1);
-        SleepAnalysisResult<Long> result = analyzer.apply(sessions);
-        assertEquals("Средняя продолжительность сессии (в минутах)", result.getDescription());
-    }
-
-    @Test
-    void applySingleSession() {
+    void applySingleSessionWithValidDescription() {
         List<SleepingSession> sessions = List.of(testSession1);
         SleepAnalysisResult<Long> result = analyzer.apply(sessions);
         assertEquals(390L, result.getValue());
+        assertEquals("Средняя продолжительность сессии (в минутах)", result.getDescription());
     }
 
     @Test

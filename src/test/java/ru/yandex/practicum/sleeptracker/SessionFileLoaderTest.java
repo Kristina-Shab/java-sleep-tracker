@@ -4,8 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 class SessionFileLoaderTest {
 
@@ -17,24 +16,12 @@ class SessionFileLoaderTest {
 
     @Test
     void getSessionsWithEmptyFile() {
-        boolean exceptionThrown = false;
-        try {
-            SessionFileLoader.getSessions("src/test/resources/Empty.txt");
-        } catch (SleepDataException e) {
-            exceptionThrown = true;
-        }
-        assertTrue(exceptionThrown);
+        assertThrows(SleepDataException.class, () -> SessionFileLoader.getSessions("src/test/resources/Empty.txt"));
     }
 
     @Test
     void getSessionsWithInvalidPath() {
-        boolean exceptionThrown = false;
-        try {
-            SessionFileLoader.getSessions("src/test/resources");
-        } catch (SleepDataException e) {
-            exceptionThrown = true;
-        }
-        assertTrue(exceptionThrown);
+        assertThrows(SleepDataException.class, () -> SessionFileLoader.getSessions("src/test/resources"));
     }
 
     @Test

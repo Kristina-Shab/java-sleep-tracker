@@ -14,8 +14,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class MinSessionDurationAnalyzerTest {
     private static MinSessionDurationAnalyzer analyzer;
     private static SleepingSession testSession1;
+    private static SleepingSession testSession2;
     private static SleepingSession testSession3;
-    private static SleepingSession testSession4;
 
     @BeforeAll
     static void beforeAll() {
@@ -25,12 +25,12 @@ class MinSessionDurationAnalyzerTest {
                 LocalDateTime.of(2026, 5, 2, 8, 30),
                 SleepQuality.GOOD
         );
-        testSession3 = new SleepingSession(
+        testSession2 = new SleepingSession(
                 LocalDateTime.of(2026, 5, 2, 2, 0),
                 LocalDateTime.of(2026, 5, 2, 8, 29),
                 SleepQuality.GOOD
         );
-        testSession4 = new SleepingSession(
+        testSession3 = new SleepingSession(
                 LocalDateTime.of(2026, 5, 2, 2, 0),
                 LocalDateTime.of(2026, 5, 2, 2, 1),
                 SleepQuality.GOOD
@@ -38,29 +38,23 @@ class MinSessionDurationAnalyzerTest {
     }
 
     @Test
-    void applyValidDescription() {
+    void applySingleSessionWithValidDescription() {
         List<SleepingSession> sessions = List.of(testSession1);
         SleepAnalysisResult<Long> result = analyzer.apply(sessions);
+        assertEquals(390L, result.getValue());
         assertEquals("Минимальная продолжительность сессии (в минутах)", result.getDescription());
     }
 
     @Test
-    void applySingleSession() {
-        List<SleepingSession> sessions = List.of(testSession1);
-        SleepAnalysisResult<Long> result = analyzer.apply(sessions);
-        assertEquals(390L, result.getValue());
-    }
-
-    @Test
     void applyMinDurationInSessions() {
-        List<SleepingSession> sessions = List.of(testSession1, testSession3);
+        List<SleepingSession> sessions = List.of(testSession1, testSession2);
         SleepAnalysisResult<Long> result = analyzer.apply(sessions);
         assertEquals(389L, result.getValue());
     }
 
     @Test
     void applySessionWithMinDuration() {
-        List<SleepingSession> sessions = List.of(testSession4, testSession3);
+        List<SleepingSession> sessions = List.of(testSession3, testSession2);
         SleepAnalysisResult<Long> result = analyzer.apply(sessions);
         assertEquals(1L, result.getValue());
     }

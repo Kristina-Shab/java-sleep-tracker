@@ -56,17 +56,11 @@ class SleeplessNightsAnalyzerTest {
     }
 
     @Test
-    void applyValidDescription() {
-        List<SleepingSession> sessions = List.of(testSession1);
-        SleepAnalysisResult<Long> result = analyzer.apply(sessions);
-        assertEquals("Количество бессонных ночей", result.getDescription());
-    }
-
-    @Test
     void applySingleSession() {
         List<SleepingSession> sessions = List.of(testSession3);
         SleepAnalysisResult<Long> result = analyzer.apply(sessions);
         assertEquals(0L, result.getValue());
+        assertEquals("Количество бессонных ночей", result.getDescription());
     }
 
     @Test

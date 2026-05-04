@@ -38,17 +38,11 @@ class BadQualitySessionsAnalyzerTest {
     }
 
     @Test
-    void applyValidDescription() {
-        List<SleepingSession> sessions = List.of(testSession1);
-        SleepAnalysisResult<Long> result = analyzer.apply(sessions);
-        assertEquals("Количество сессий с плохим качеством сна", result.getDescription());
-    }
-
-    @Test
-    void applySingleSession() {
+    void applySingleSessionWithValidDescription() {
         List<SleepingSession> sessions = List.of(testSession1);
         SleepAnalysisResult<Long> result = analyzer.apply(sessions);
         assertEquals(0, result.getValue());
+        assertEquals("Количество сессий с плохим качеством сна", result.getDescription());
     }
 
     @Test
